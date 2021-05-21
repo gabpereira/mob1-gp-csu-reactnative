@@ -8,7 +8,8 @@
 - CSU Checker sur youtube -> Sur quoi nous devons nous baser: https://www.youtube.com/watch?v=rbjkvZLlteM&ab_channel=XavierCarrel
 - L'api fait sur Laravel: https://github.com/XCarrel/CSUAPI
 ## Installation
-lancer l app avec: **expo start**
+- lancer **npm i**
+- lancer l app avec: **expo start**
 
 **a** open Android  
 **w** open web  
