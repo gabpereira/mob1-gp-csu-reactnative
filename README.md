@@ -4,11 +4,12 @@
 - Contraintes utiliser les class et non les functions
 
 ## Différents outils mis a disposition
-- IceScrum -> gestion du projet
+- IceScrum -> gestion du projet: https://icescrum.cpnv.ch/p/MOB1GABP/#/backlog/backlog
 - CSU Checker sur youtube -> Sur quoi nous devons nous baser: https://www.youtube.com/watch?v=rbjkvZLlteM&ab_channel=XavierCarrel
+- L'api fait sur Laravel: https://github.com/XCarrel/CSUAPI
 ## Installation
-lancer l app: expo start
+lancer l app avec: **expo start**
 
-a open Android
-w open web
-d show developer tool
+**a** open Android  
+**w** open web  
+**d** show developer tool
