@@ -1,14 +1,14 @@
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import React, { Component } from 'react';
 
-import Login from './views/login';
+import { NavigationContainer } from '@react-navigation/native';
+import { DrawerScreen } from './components/drawerscreens';
 
-const AppNavigator = createStackNavigator({
-    Login: Login,
-},
-{
-    initialRouteName: 'Login',
-});
-
-const Router = createAppContainer(AppNavigator);
-export default Router;
+export default class Router extends Component {
+    render() {
+        return(
+            <NavigationContainer>
+                <DrawerScreen />
+            </NavigationContainer>
+        )
+    }
+}
