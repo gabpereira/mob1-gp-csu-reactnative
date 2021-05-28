@@ -45,6 +45,7 @@ export default class Login extends Component{
                         />
                     </View>
                     <View style={Styles.inputGroups}>
+                        <Text style={Styles.label}>Bases:</Text>
                         <Picker style={{marginTop: 10}}>
                             {this.state.bases.map(base =>
                                 <Picker.Item label={base.name} value={base.id} />    
