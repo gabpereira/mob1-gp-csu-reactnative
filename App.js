@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import 'react-native-gesture-handler';
+
+import { AuthContext } from './src/components/context'
 
 import Router from './src/Router'
 export default class App extends Component {
