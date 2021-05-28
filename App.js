@@ -1,12 +1,8 @@
-import React from 'react';
-import { View } from 'react-native';
-import Styles from './src/styles/appStyle'
-import Login from './src/views/login';
+import React, { Component } from 'react';
 
-export default function App() {
-  return (
-    <View style={Styles.container}>
-        <Login />
-    </View>
-  );
+import Router from './src/Router'
+export default class App extends Component {
+  render() {
+    return <Router />;
+  }
 }
