@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import Styles from '../styles/loginStyle';
 //import inputRegister from '../components/inputRegister'
 import { Text, View, TextInput, ImageBackground, Button } from 'react-native';
-//import axios from 'axios';
 
+import axios from 'axios';
+import API from '../../api/Api'
 export default class Login extends Component{
     constructor(props){
         super(props);
