@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
 import Styles from '../styles/loginStyle';
+import { Picker } from '@react-native-picker/picker';
 //import inputRegister from '../components/inputRegister'
 import { Text, View, TextInput, ImageBackground, Button } from 'react-native';
 
-import axios from 'axios';
 import API from '../../api/Api'
 export default class Login extends Component{
     constructor(props){
         super(props);
-        this.state ={value: 'payerne'};
-
-        this.handleChange = this.handleChange.bind(this);
+        this.state = {
+            bases: new Array()
+        }
     }
 
-    handleChange(event) {
-        this.setState({value: event.target.value});
+    componentDidMount(){
+        API.get('bases')
+        .then(res => {
+            this.setState({bases: res.data});
+            console.log(this.state.bases);
+        })
     }
 
     render() {
@@ -41,16 +45,11 @@ export default class Login extends Component{
                         />
                     </View>
                     <View style={Styles.inputGroups}>
-                        <label>
-                            Base
-                            <select value={this.state.value} onChange={this.handleChange}>
-                                <option value="valleDeJoux">La Vallée-de-Joux</option>
-                                <option value="payerne">Payerne</option>
-                                <option value="saintloup">Saint-Loup</option>
-                                <option value="steCroix">Ste-Croix</option>
-                                <option value="yverdon">Yverdon</option>
-                            </select>
-                        </label>
+                        <Picker style={{marginTop: 10}}>
+                            {this.state.bases.map(base =>
+                                <Picker.Item label={base.name} value={base.id} />    
+                            )}
+                        </Picker>
                     </View>
                     <Button title="Se connecter" />
                 </View>
