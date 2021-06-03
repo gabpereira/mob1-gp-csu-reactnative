@@ -3,6 +3,7 @@ import Styles from '../styles/loginStyle';
 import { Picker } from '@react-native-picker/picker';
 //import inputRegister from '../components/inputRegister'
 import { Text, View, TextInput, ImageBackground, Button } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import API from '../../api/Api'
 export default class Login extends Component{
@@ -32,6 +33,7 @@ export default class Login extends Component{
                         <Text style={Styles.label}>Initiales:</Text>
                         <TextInput
                             style={Styles.textInput}
+                            maxLength={3}
                             placeholderTextColor="rgb(180, 180, 180)"
                             placeholder="gab" 
                         />
@@ -43,6 +45,7 @@ export default class Login extends Component{
                             placeholderTextColor="rgb(180, 180, 180)"
                             placeholder="mot de passe" 
                         />
+                        <Icon name="ios-eye-outline" size={20} color="white" />
                     </View>
                     <View style={Styles.inputGroups}>
                         <Text style={Styles.label}>Bases:</Text>
