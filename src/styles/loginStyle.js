@@ -33,6 +33,9 @@ const styles = StyleSheet.create({
         width: null,
         height: Dimensions.get('window').height,
     },
+    error:{
+        color: "red",
+    },
 });
 
 export default styles; 

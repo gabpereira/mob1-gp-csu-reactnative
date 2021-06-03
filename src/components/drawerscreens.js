@@ -36,7 +36,7 @@ const PrincipalMenuStackScreen = ({ navigation }) => (
 
 const Drawer = createDrawerNavigator();
 export const DrawerScreen = () => (
-    <Drawer.Navigator initialRouteName="Login"
+    <Drawer.Navigator initialRouteName="PrincipalMenu"
         drawerType="back"
         drawerContentOptions={{
             labelStyle: {
