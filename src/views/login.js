@@ -4,8 +4,6 @@ import { Picker } from '@react-native-picker/picker';
 import { Text, View, TextInput, ImageBackground, Button } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {AuthContext} from '../components/context';
-
-import Router from '../Router';
 export default class Login extends Component{
     constructor(props){
         super(props);
@@ -55,7 +53,6 @@ export default class Login extends Component{
             });
         this.context.changeIsLogged(true);
         window.localStorage.setItem("token", token);
-        this.props.navigation.navigate('Router');
         }
         else {
             this.setState({
