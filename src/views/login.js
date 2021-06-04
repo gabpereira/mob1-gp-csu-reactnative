@@ -62,7 +62,7 @@ export default class Login extends Component{
         }
     }
 
-      async getBases(_this){
+    async getBases(_this){
         let str_api = 'http://127.0.0.1:8000/api/';
     
         let bases =  await fetch(str_api + 'bases', {
@@ -86,23 +86,23 @@ export default class Login extends Component{
         this.setState({
             bases: bases
         });
-        }
+    }
 
-        handleText(input, value) {
+    handleText(input, value) {
             this.setState({
                 [input]: value
             });
-        }
+    }
         
-          componentDidMount () {
+    componentDidMount () {
             this.getBases();
-          }
+    }
 
     render() {
 
-        let updateBase = (base) => {
-            this.setState({ base: base })
-          }
+      let updateBase = (base) => {
+        this.setState({ base: base })
+      }
 
         return(
             <ImageBackground
