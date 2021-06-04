@@ -36,16 +36,7 @@ const PrincipalMenuStackScreen = ({ navigation }) => (
 
 const Drawer = createDrawerNavigator();
 export const DrawerScreen = () => (
-    <Drawer.Navigator initialRouteName="PrincipalMenu"
-        drawerType="back"
-        drawerContentOptions={{
-            labelStyle: {
-                fontSize: 20,
-            },
-            activeBackgroundColor: "rgba(160, 187, 194, 0.5)",
-            activeTintColor: "rgb(0, 94, 146)"
-        }}
-        drawerStyle={{ position: "absolute", top: 60 }} >
+    <Drawer.Navigator initialRouteName="PrincipalMenu" drawerType="back" drawerContentOptions={{ labelStyle: { fontSize: 20,}, activeBackgroundColor: "rgba(160, 187, 194, 0.5)", activeTintColor: "rgb(0, 94, 146)" }} drawerStyle={{ position: "absolute", top: 60 }} >
         <Drawer.Screen name="Login" component={LoginStackScreen} />
         <Drawer.Screen name="PrincipalMenu" component={PrincipalMenuStackScreen} />
     </Drawer.Navigator>

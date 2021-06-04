@@ -13,6 +13,7 @@ export default class Login extends Component{
 
         this.state = {
             bases: [],
+            base: '',
             initials: null,
             password: null,
             connection_fail: false,
@@ -121,10 +122,11 @@ export default class Login extends Component{
                     </View>
                     <View style={Styles.inputGroups}>
                         <Text style={Styles.label}>Bases:</Text>
-                        <Picker style={{marginTop: 10}}>
-                            {this.state.bases.map(
-                                base =><Picker.Item label={base.key} label={base.name} value={base.id} />    
-                            )}
+                        <Picker style={{marginTop: 10}} selectedValue={this.state.base} onValueChange={updateBase}>
+                          {this.state.bases == [] ? <Text>nothing</Text> : (
+                          this.state.bases.map(base =>
+                            <Picker.Item key={base.id} label={base.name} value={base.id} />)
+                          )}
                         </Picker>
                     </View>
                     <Button title="Se connecter"  onPress={this._onPressButton} />
