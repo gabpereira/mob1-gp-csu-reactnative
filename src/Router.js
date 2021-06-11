@@ -11,21 +11,28 @@ export default class Router extends Component {
         super(props);
     
         this.state = {
-          is_logged : false,
+          token : localStorage.getItem('token') ?? null,
+          base: localStorage.getItem('id_base') ?? "",
         };
       }
     
       changeIsLogged = (val) => {
         this.setState({
-          is_logged: val,
-        })
+          token: val,
+        });
+      }
+
+      changeBase = (val) => {
+        this.setState({
+          base: val,
+        });
       }
 
     render() {
         return(
-            <AuthContext.Provider value={{ changeIsLogged: this.changeIsLogged}}>
+            <AuthContext.Provider value={{ token: this.state.token, changeIsLogged: this.changeIsLogged, changeBase: this.changeBase,}}>
                 <NavigationContainer>
-                    {this.state.is_logged ? (
+                    {this.state.token ? (
                         <DrawerScreen />
                     ) : (
                         <AuthScreen />
