@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import Styles from '../styles/principalMenuStyle';
 
-import { Button, View, Text, ImageBackground, StyleSheet, TouchableOpacity  } from 'react-native';
-import API from '../../api/Api';
+import { View, Text, ImageBackground, TouchableOpacity  } from 'react-native';
 
+import {AuthContext} from '../components/context';
 export default class PrincipalMenu extends Component{
     constructor(props){
         super(props)
-    }
-    /*state = {
-        user: [],
+
+        this.onPressButton = this.onPressButton.bind(this);
     }
 
-    componentDidMount() {
-        axios.get(`http://localhost:8000/api/user`).then(res => {
-            const user = res.data; this.setState({user})
-        })
-    }*/
+
+    async onPressButton() {
+        window.localStorage.removeItem('token');
+        window.localStorage.removeItem('id_base');
+        this.context.changeIsLogged(null);
+    }
 
     render() {
         return(
@@ -32,14 +32,9 @@ export default class PrincipalMenu extends Component{
                         <TouchableOpacity 
                             activeOpacity={0.95} 
                             style={Styles.buttonLogout} 
-                            onPress={() => {
-                                localStorage.removeItem('token');
-                                localStorage.removeItem('nav');
-                                let userToken = localStorage.getItem('token')
-                                this.props.auth(userToken)
-                            }}
+                            onPress={this.onPressButton}
                         >
-                            <Text style={Styles.textLogPout}>Se déconnecter</Text>
+                        <Text style={Styles.textLogout}>Se déconnecter</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -47,3 +42,5 @@ export default class PrincipalMenu extends Component{
         )
     }
 }
+
+PrincipalMenu.contextType = AuthContext;
