@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
         color: 'white',
     },
     label: {
-        flex: 0,
         fontSize: 15,
         paddingRight: 10,
         color: 'white',
@@ -44,6 +43,7 @@ const styles = StyleSheet.create({
         elevation:3,
     },
     textLogout: {
+        flex: 0,
         fontSize: 16,
         color: "white",
         fontWeight: 'bold',
