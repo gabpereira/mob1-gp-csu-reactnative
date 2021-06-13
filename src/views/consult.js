@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Styles from '../styles/loginStyle';
 
 import { View, ImageBackground, Button, FlatList, Text } from 'react-native';
+import Grid from '@material-ui/core/Grid';
 
 import {AuthContext} from '../components/context';
 
@@ -71,21 +72,27 @@ export default class Consult extends Component{
                 style={Styles.background}
             >
                 <View>
-                    <Button title="Garde" onPress={this.showShift}/>
-                    <Button title="Stup" onPress={this.showDrug}/>
+                    <Grid container spacing={3}>
+                        <Grid item xs={6}>
+                            <Button title="Garde" onPress={this.showShift}/>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Button title="Stup" onPress={this.showDrug}/>
+                        </Grid>
+                    </Grid>
                     <View>
-                        {this.state.show == "shift" ? this.state.shift.length <= 0 ? <Text>Aucune information</Text> :
+                        {this.state.show == "shift" ? this.state.shift.length <= 0 ? <Text style={Styles.label}>Aucune information</Text> :
                             <FlatList
                                 data={this.state.shift}
-                                renderItem={({item}) => <Text>Le {item.date} à {item.base}</Text>}
+                                renderItem={({item}) => <Text style={Styles.label}>Le {item.date} à {item.base}</Text>}
                                 keyExtractor={item => item.id.toString()}
                             />
                             : null 
                         }
-                        {this.state.show == "drug" ? this.state.drug.length <= 0 ? <Text>Aucune information</Text> :
+                        {this.state.show == "drug" ? this.state.drug.length <= 0 ? <Text style={Styles.label}>Aucune information</Text> :
                             <FlatList
                                 data={this.state.drug}
-                                renderItem={({item}) => <Text>Semaine {item.week} à {item.base}</Text>}
+                                renderItem={({item}) => <Text style={Styles.label}>Semaine {item.week} à {item.base}</Text>}
                                 keyExtractor={item => item.id.toString()}
                             />
                             : null
