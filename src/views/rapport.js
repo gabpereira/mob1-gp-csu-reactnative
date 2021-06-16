@@ -4,10 +4,15 @@ import Styles from '../styles/loginStyle';
 import { View, ImageBackground, Button, FlatList, Text } from 'react-native';
 import Grid from '@material-ui/core/Grid';
 
+import {AuthContext} from '../components/context';
+
+
 export default class Rapport extends Component{
 
     constructor(props){
         super(props)
+
+        this.getChecks = this.getChecks.bind(this);
 
         this.api = 'http://127.0.0.1:8000/api/';
 
@@ -16,6 +21,34 @@ export default class Rapport extends Component{
             nova: [],
             show: "",
         };
+    }
+
+    async getChecks(){
+        let token = this.context.token;
+        let id_base = this.context.base.id;
+        let checks =  await fetch(this.api + 'missingchecks/' + id_base, {
+            method: 'GET',
+            headers: {'Authorization': 'Bearer ' + token},
+        })
+        .then(function(response) {
+            if(response.ok) {
+              return response.json();
+            }
+            else {
+              console.log('Mauvaise réponse du réseau');
+            }
+          })
+          .then(function(data){
+            return data;
+          })
+          .catch(function(error) {
+            console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
+          });
+
+          this.setState({
+            pharma: checks ? checks.pharma : [],
+            nova: checks ? checks.nova : [],
+          });
     }
 
     showPharma = () => {
@@ -29,6 +62,10 @@ export default class Rapport extends Component{
           show: "NovaCheck"
         });
     }
+
+    componentDidMount () {
+        this.getChecks();
+     }
 
     render() {
         return(
@@ -65,3 +102,5 @@ export default class Rapport extends Component{
         )
     }
 }
+
+Rapport.contextType = AuthContext;

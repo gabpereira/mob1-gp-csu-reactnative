@@ -62,7 +62,7 @@ export default class Login extends Component{
         }
     }
 
-    async getBases(_this){
+    async getBases(){
         let str_api = 'http://127.0.0.1:8000/api/';
     
         let bases =  await fetch(str_api + 'bases', {
@@ -86,6 +86,7 @@ export default class Login extends Component{
         this.setState({
             bases: bases
         });
+        this.updateBase(bases ? bases[0].id : '');
     }
 
     handleText(input, value) {
@@ -98,14 +99,11 @@ export default class Login extends Component{
             this.getBases();
     }
 
+    updateBase = (val) => {
+      this.setState({ base: val });
+    }
+
     render() {
-
-      let updateBase = (base) => {
-        this.setState({ base: base });
-        this.context.changeBase(base);
-        localStorage.setItem("id_base", base);
-      }
-
         return(
             <ImageBackground
                 source={require('../pictures/space.jpg')}
@@ -124,7 +122,7 @@ export default class Login extends Component{
                     </View>
                     <View style={Styles.inputGroups}>
                         <Text style={Styles.label}>Bases:</Text>
-                        <Picker style={{marginTop: 10}} selectedValue={this.state.base} onValueChange={updateBase}>
+                        <Picker style={{marginTop: 10}} selectedValue={this.state.base} onValueChange={this.updateBase}>
                           {this.state.bases == [] ? <Text>nothing</Text> : (
                           this.state.bases.map(base =>
                             <Picker.Item key={base.id} label={base.name} value={base.id} />)
