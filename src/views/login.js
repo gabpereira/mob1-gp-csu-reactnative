@@ -14,8 +14,8 @@ export default class Login extends Component{
         this.state = {
             bases: [],
             base: '',
-            initials: null,
-            password: null,
+            initials: '',
+            password: '',
             connection_fail: false,
         }
     }
@@ -52,8 +52,8 @@ export default class Login extends Component{
             this.setState({
               connection_fail: false
             });
-        this.context.changeIsLogged(true);
-        window.localStorage.setItem("token", token);
+        this.context.changeIsLogged(token);
+        this.context.changeBase(this.state.bases.find(base => base.id = this.state.base));
         }
         else {
             this.setState({

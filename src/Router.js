@@ -12,7 +12,10 @@ export default class Router extends Component {
     
         this.state = {
           token : localStorage.getItem('token') ?? null,
-          base: localStorage.getItem('base') ?? "",
+          base: {
+            id: localStorage.getItem('base_id') ?? "",
+            name: localStorage.getItem('base_name') ?? "",
+          }
         };
       }
     
@@ -23,16 +26,20 @@ export default class Router extends Component {
         localStorage.setItem("token", val);
       }
 
-      changeBase = (val) => {
+      changeBase = (id, name) => {
         this.setState({
-          base: val,
+          base: {
+            id: id,
+            name: name,
+          },
         });
-        localStorage.setItem("base", val);
+        localStorage.setItem("base_id", id);
+        localStorage.setItem("base_name", name);
       }
 
     render() {
         return(
-            <AuthContext.Provider value={{ token: this.state.token, changeIsLogged: this.changeIsLogged, changeBase: this.changeBase,}}>
+            <AuthContext.Provider value={{ token: this.state.token, base: this.state.base, changeIsLogged: this.changeIsLogged, changeBase: this.changeBase,}}>
                 <NavigationContainer>
                     {this.state.token ? (
                         <DrawerScreen />
