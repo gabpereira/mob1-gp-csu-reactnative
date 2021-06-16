@@ -101,7 +101,9 @@ export default class Login extends Component{
     render() {
 
       let updateBase = (base) => {
-        this.setState({ base: base })
+        this.setState({ base: base });
+        this.context.changeBase(base);
+        localStorage.setItem("id_base", base);
       }
 
         return(
