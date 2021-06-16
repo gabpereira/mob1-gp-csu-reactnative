@@ -81,7 +81,7 @@ export default class Consult extends Component{
                         </Grid>
                     </Grid>
                     <View>
-                        {this.state.show == "shift" ? this.state.shift.length <= 0 ? <Text style={Styles.label}>Aucune information</Text> :
+                        {this.state.show == "shift" ? this.state.shift.length <= 0 ? <Text style={Styles.label}>Il n'y a aucune information</Text> :
                             <FlatList
                                 data={this.state.shift}
                                 renderItem={({item}) => <Text style={Styles.label}>Le {item.date} à {item.base}</Text>}
@@ -89,7 +89,7 @@ export default class Consult extends Component{
                             />
                             : null 
                         }
-                        {this.state.show == "drug" ? this.state.drug.length <= 0 ? <Text style={Styles.label}>Aucune information</Text> :
+                        {this.state.show == "drug" ? this.state.drug.length <= 0 ? <Text style={Styles.label}>Il n'y a aucune information</Text> :
                             <FlatList
                                 data={this.state.drug}
                                 renderItem={({item}) => <Text style={Styles.label}>Semaine {item.week} à {item.base}</Text>}
