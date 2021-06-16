@@ -21,7 +21,7 @@ export default class Consult extends Component{
         };
     }
 
-    async getReports(_this){
+    async getReports(){
         let token = this.context.token;
     
         let reports =  await fetch(this.api + 'reports', {
