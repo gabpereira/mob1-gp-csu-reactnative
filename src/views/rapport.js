@@ -6,7 +6,6 @@ import Grid from '@material-ui/core/Grid';
 
 import {AuthContext} from '../components/context';
 
-
 export default class Rapport extends Component{
 
     constructor(props){
@@ -46,20 +45,20 @@ export default class Rapport extends Component{
           });
 
           this.setState({
-            pharma: checks ? checks.pharma : [],
-            nova: checks ? checks.nova : [],
+            pharmacheck: checks ? checks.pharmacheck : [],
+            novacheck: checks ? checks.novacheck : [],
           });
     }
 
     showPharma = () => {
         this.setState({
-          show: "Pharmacheck"
+          show: "pharmacheck"
         });
     }
     
     showNova = () => {
         this.setState({
-          show: "NovaCheck"
+          show: "novacheck"
         });
     }
 
@@ -80,7 +79,7 @@ export default class Rapport extends Component{
                         </Grid>
                     </Grid>
                     <View>
-                        {this.state.show == "Pharmacheck" ? this.state.pharma.length <= 0 ? <Text style={Styles.label}>Il n'y a aucune information</Text> :
+                        {this.state.show == "pharmacheck" ? this.state.pharmacheck.length <= 0 ? <Text style={Styles.label}>Il n'y a aucune information</Text> :
                             <FlatList
                                 data={this.state.shift}
                                 renderItem={({item}) => <Text style={Styles.label}>Le {item.date} à {item.base}</Text>}
@@ -88,7 +87,7 @@ export default class Rapport extends Component{
                             />
                             : null 
                         }
-                        {this.state.show == "NovaCheck" ? this.state.nova.length <= 0 ? <Text style={Styles.label}>Il n'y a aucune information</Text> :
+                        {this.state.show == "novacheck" ? this.state.novacheck.length <= 0 ? <Text style={Styles.label}>Il n'y a aucune information</Text> :
                             <FlatList
                                 data={this.state.drug}
                                 renderItem={({item}) => <Text style={Styles.label}>Semaine {item.week} à {item.base}</Text>}
