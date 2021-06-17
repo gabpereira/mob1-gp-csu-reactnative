@@ -92,7 +92,20 @@ export default class Consult extends Component{
                         {this.state.show == "drug" ? this.state.drug.length <= 0 ? <Text style={Styles.label}>Il n'y a aucune information</Text> :
                             <FlatList
                                 data={this.state.drug}
-                                renderItem={({item}) => <Text style={Styles.label}>Semaine {item.week} à {item.base}</Text>}
+                                renderItem={
+                                    ({item}) =>
+                                      <Text
+                                        style={Styles.label}
+                                        onPress={
+                                        () =>this.props.navigation.navigate('DetailShiftActions', {
+                                          id: item.id,
+                                          title: ("Dans le rapport du " + item.week + " à " + item.base)
+                                        })
+                                      }
+                                      >
+                                        Le {item.week} à {item.base}
+                                      </Text>
+                                    }
                                 keyExtractor={item => item.id.toString()}
                             />
                             : null
