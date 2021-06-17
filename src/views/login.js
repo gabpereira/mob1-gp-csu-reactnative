@@ -11,9 +11,13 @@ export default class Login extends Component{
         this.getBases = this.getBases.bind(this);
         this._onPressButton = this._onPressButton.bind(this);
 
+        this.updateBase = this.updateBase.bind(this);
+        this.getBaseName = this.getBaseName.bind(this);
+
         this.state = {
             bases: [],
-            base: '',
+            base_name: '',
+            base_id: '',
             initials: '',
             password: '',
             connection_fail: false,
@@ -24,6 +28,8 @@ export default class Login extends Component{
         let str_api = 'http://127.0.0.1:8000/api/';
         let initials = this.state.initials;
         let password = this.state.password;
+        let base_name =  this.state.base_name;
+        let base_id = this.state.base_id;
         let connection_fail = false;
     
         let token = await fetch(str_api + 'gettoken', {
@@ -53,7 +59,8 @@ export default class Login extends Component{
               connection_fail: false
             });
         this.context.changeIsLogged(token);
-        this.context.changeBase(this.state.bases.find(base => base.id = this.state.base));
+        this.context.changeBase_name(base_name);
+        this.context.changeBase_id(base_id);
         }
         else {
             this.setState({
@@ -86,7 +93,6 @@ export default class Login extends Component{
         this.setState({
             bases: bases
         });
-        this.updateBase(bases ? bases[0].id : '');
     }
 
     handleText(input, value) {
@@ -99,8 +105,21 @@ export default class Login extends Component{
             this.getBases();
     }
 
+    getBaseName(val) {
+      console.log(val);
+      let baseName = "";
+      this.state.bases.map((base) => {
+        if (val == base.id) {
+          baseName = base.name;
+          console.log(base.name)
+        }else{
+        }
+      });
+      return baseName;
+    }
+  
     updateBase = (val) => {
-      this.setState({ base: val });
+      this.setState({base_name: this.getBaseName(val), base_id: val});
     }
 
     render() {
@@ -122,10 +141,11 @@ export default class Login extends Component{
                     </View>
                     <View style={Styles.inputGroups}>
                         <Text style={Styles.label}>Bases:</Text>
-                        <Picker style={{marginTop: 10}} selectedValue={this.state.base} onValueChange={this.updateBase}>
+                          <Picker style={{marginTop: 10}} selectedValue={this.state.base} onValueChange={this.updateBase}>
                           {this.state.bases == [] ? <Text>nothing</Text> : (
                           this.state.bases.map(base =>
-                            <Picker.Item key={base.id} label={base.name} value={base.id} />)
+                            <Picker.Item label={base.name} value={base.id} key={base.id}/>
+                            )
                           )}
                         </Picker>
                     </View>

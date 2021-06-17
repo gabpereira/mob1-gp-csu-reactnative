@@ -24,8 +24,8 @@ export default class Rapport extends Component{
 
     async getChecks(){
         let token = this.context.token;
-        let id_base = this.context.base.id;
-        let checks =  await fetch(this.api + 'missingchecks/' + id_base, {
+        let base = this.context.base;
+        let checks =  await fetch(this.api + 'missingchecks/' + base, {
             method: 'GET',
             headers: {'Authorization': 'Bearer ' + token},
         })
