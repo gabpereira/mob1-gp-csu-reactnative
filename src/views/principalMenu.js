@@ -19,8 +19,9 @@ export default class PrincipalMenu extends Component{
     }
 
     async onPressButton() {
-        window.localStorage.removeItem('token');
-        window.localStorage.removeItem('id_base');
+        localStorage.removeItem('token');
+        localStorage.removeItem('base_id');
+        localStorage.removeItem('base_name');
         this.context.changeIsLogged(null);
     }
 
