@@ -31,16 +31,16 @@ export default class Router extends Component {
         localStorage.setItem("base_name", val);
       }
 
-      changeBase_id = (id) => {
+      changeBase_id = (val) => {
         this.setState({
-          base_id: id,
+          base_id: val,
         });
-        localStorage.setItem("base_id", id);
+        localStorage.setItem("base_id", val);
       }
 
     render() {
         return(
-            <AuthContext.Provider value={{ token: this.state.token, base_name: this.state.base_name, base_name: this.state.base_name, changeIsLogged: this.changeIsLogged, changeBase_name: this.changeBase_name, changeBase_id: this.changeBase_id}}>
+            <AuthContext.Provider value={{ token: this.state.token, base_name: this.state.base_name, base_id: this.state.base_id, changeIsLogged: this.changeIsLogged, changeBase_name: this.changeBase_name, changeBase_id: this.changeBase_id}}>
                 <NavigationContainer>
                     {this.state.token ? (
                         <DrawerScreen />

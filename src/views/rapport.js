@@ -24,8 +24,9 @@ export default class Rapport extends Component{
 
     async getChecks(){
         let token = this.context.token;
-        let base = this.context.base;
-        let checks =  await fetch(this.api + 'missingchecks/' + base, {
+        let base_id = this.context.base_id; console.log(base_id);
+
+        let checks =  await fetch(this.api + 'missingchecks/' + base_id, {
             method: 'GET',
             headers: {'Authorization': 'Bearer ' + token},
         })
@@ -45,20 +46,20 @@ export default class Rapport extends Component{
           });
 
           this.setState({
-            pharmacheck: checks ? checks.pharmacheck : [],
-            novacheck: checks ? checks.novacheck : [],
+            pharma: checks ? checks.pharma : [],
+            nova: checks ? checks.nova : [],
           });
     }
 
     showPharma = () => {
         this.setState({
-          show: "pharmacheck"
+          show: "pharma"
         });
     }
     
     showNova = () => {
         this.setState({
-          show: "novacheck"
+          show: "nova"
         });
     }
 
@@ -79,20 +80,12 @@ export default class Rapport extends Component{
                         </Grid>
                     </Grid>
                     <View>
-                        {this.state.show == "pharmacheck" ? this.state.pharmacheck.length <= 0 ? <Text style={Styles.label}>Il n'y a aucune information</Text> :
-                            <FlatList
-                                data={this.state.shift}
-                                renderItem={({item}) => <Text style={Styles.label}>Le {item.date} à {item.base}</Text>}
-                                keyExtractor={item => item.id.toString()}
-                            />
+                        {this.state.show == "pharma" ? this.state.pharma.length <= 0 ? <Text style={Styles.label}>Il n'y a aucune information</Text> :
+                            <Text>pharma</Text>
                             : null 
                         }
-                        {this.state.show == "novacheck" ? this.state.novacheck.length <= 0 ? <Text style={Styles.label}>Il n'y a aucune information</Text> :
-                            <FlatList
-                                data={this.state.drug}
-                                renderItem={({item}) => <Text style={Styles.label}>Semaine {item.week} à {item.base}</Text>}
-                                keyExtractor={item => item.id.toString()}
-                            />
+                        {this.state.show == "nova" ? this.state.nova.length <= 0 ? <Text style={Styles.label}>Il n'y a aucune information</Text> :
+                            <Text>nova</Text>
                             : null
                         }
                     </View>
