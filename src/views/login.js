@@ -106,12 +106,10 @@ export default class Login extends Component{
     }
 
     getBaseName(val) {
-      console.log(val);
       let baseName = "";
       this.state.bases.map((base) => {
         if (val == base.id) {
           baseName = base.name;
-          console.log(base.name)
         }else{
         }
       });

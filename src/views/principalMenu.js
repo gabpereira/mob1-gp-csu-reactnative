@@ -70,7 +70,7 @@ export default class PrincipalMenu extends Component{
             >
                 <View style={Styles.container}>
                     <View style={Styles.inputGroups}>
-                        <Text style={Styles.label}>Prénom: {/*this.state.user.firstname*/}{'\n'}Nom: {/*this.state.user.lastname*/}</Text>
+                        <Text style={Styles.label}>Prénom: {this.state.user.firstname}{'\n'}Nom: {this.state.user.lastname}</Text>
                     </View>
                     <View>
                         <TouchableOpacity 
@@ -78,7 +78,7 @@ export default class PrincipalMenu extends Component{
                             style={Styles.buttonLogout} 
                             onPress={this.onPressButton}
                         >
-                        <Text style={Styles.textLogout}>{/*this.state.user.initials*/} Déconnexion</Text>
+                        <Text style={Styles.textLogout}>{this.state.user.initials} Déconnexion</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
