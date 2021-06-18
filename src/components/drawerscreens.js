@@ -20,7 +20,7 @@ const ConsultStackScreen = ({ navigation }) => (
                     <Icon name='ios-menu' size={25} color='black' />
                 </TouchableOpacity>
             ) }} />
-            <ConsultStack.Screen name="DetailShiftAction" component={DetailShiftAction}/>
+        <ConsultStack.Screen name="Détail" component={DetailShiftAction} />
     </ConsultStack.Navigator>
 );
 

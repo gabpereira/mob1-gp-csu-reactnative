@@ -5,10 +5,12 @@ import {
   View,
   Text,
   FlatList,
+  ImageBackground
 } from 'react-native';
 
-// Contexts
-import { AuthContext } from '../components/context'; // Perm login to change user status
+import Styles from '../styles/loginStyle';
+
+import { AuthContext } from '../components/context'; 
 
 export default class DetailShiftAction extends Component {
   constructor(props) {
@@ -59,18 +61,23 @@ export default class DetailShiftAction extends Component {
 
   render() {
     return (
-      <View>
-        <Text>{this.props.route.params.title}</Text>
+      <ImageBackground
+      source={require('../pictures/space.jpg')}
+      style={Styles.background}
+      >
         <View>
-          {this.state.shift_actions.length <= 0 ? <Text>Aucune information</Text> :
-            <FlatList
-              data={this.state.shift_actions}
-              renderItem={({item}) => <Text>{item.day ? "J" : "N"} {item.action} {item.at}</Text>}
-              keyExtractor={item => item.id.toString()}
-            />
-          }
+          <Text style={Styles.label}>{this.props.route.params.title}</Text>
+          <View>
+            {this.state.shift_actions.length <= 0 ? <Text style={Styles.label}>Aucune information</Text> :
+              <FlatList
+                data={this.state.shift_actions}
+                renderItem={({item}) => <Text style={Styles.label}>{item.day ? "J" : "N"} {item.action} {item.at}</Text>}
+                keyExtractor={item => item.id.toString()}
+              />
+            }
+          </View>
         </View>
-      </View>
+      </ImageBackground>
     );
   }
 }
