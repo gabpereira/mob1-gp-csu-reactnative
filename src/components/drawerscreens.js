@@ -8,6 +8,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import Consult from '../views/consult';
 import PrincipalMenu from '../views/principalMenu';
 import Rapport from '../views/rapport';
+import DetailShiftAction from './detailShiftAction';
 
 const ConsultStack = createStackNavigator();
 const ConsultStackScreen = ({ navigation }) => (
@@ -19,6 +20,7 @@ const ConsultStackScreen = ({ navigation }) => (
                     <Icon name='ios-menu' size={25} color='black' />
                 </TouchableOpacity>
             ) }} />
+        <ConsultStack.Screen name="Détail" component={DetailShiftAction} />
     </ConsultStack.Navigator>
 );
 

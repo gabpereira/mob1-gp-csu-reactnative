@@ -4,7 +4,12 @@ import Styles from '../styles/loginStyle';
 import { View, ImageBackground, Button, FlatList, Text } from 'react-native';
 import Grid from '@material-ui/core/Grid';
 
+import { createStackNavigator } from '@react-navigation/stack';
+import DetailShiftAction from '../components/detailShiftAction'
+
 import {AuthContext} from '../components/context';
+
+const Stack = createStackNavigator();
 
 export default class Consult extends Component{
     constructor(props){
@@ -84,7 +89,19 @@ export default class Consult extends Component{
                         {this.state.show == "shift" ? this.state.shift.length <= 0 ? <Text style={Styles.label}>Il n'y a aucune information</Text> :
                             <FlatList
                                 data={this.state.shift}
-                                renderItem={({item}) => <Text style={Styles.label}>Le {item.date} à {item.base}</Text>}
+                                renderItem={
+                                  ({item}) => 
+                                    <Text 
+                                      style={Styles.label}
+                                      onPress={() => this.props.navigation.navigate('Détail', {
+                                          id: item.id,
+                                          title: ("Dans le rapport du " + item.date + " à " + item.base) 
+                                        })
+                                      }
+                                      >
+                                        Le {item.date} à {item.base}
+                                      </Text>
+                                }
                                 keyExtractor={item => item.id.toString()}
                             />
                             : null 
@@ -92,7 +109,14 @@ export default class Consult extends Component{
                         {this.state.show == "drug" ? this.state.drug.length <= 0 ? <Text style={Styles.label}>Il n'y a aucune information</Text> :
                             <FlatList
                                 data={this.state.drug}
-                                renderItem={({item}) => <Text style={Styles.label}>Semaine {item.week} à {item.base}</Text>}
+                                renderItem={
+                                    ({item}) => 
+                                      <Text
+                                        style={Styles.label}
+                                      >
+                                        La semaine {item.week} à {item.base}
+                                      </Text>
+                                    }
                                 keyExtractor={item => item.id.toString()}
                             />
                             : null

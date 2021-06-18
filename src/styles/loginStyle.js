@@ -30,8 +30,10 @@ const styles = StyleSheet.create({
     },
     background: {
         flex: 1,
-        width: null,
         height: Dimensions.get('window').height,
+        width: Dimensions.get('window').width,
+        position: "absolute",
+        resizeMode: 'cover',
     },
     error:{
         color: "red",
