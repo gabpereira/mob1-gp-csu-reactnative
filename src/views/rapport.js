@@ -5,6 +5,8 @@ import { View, ImageBackground, Button, FlatList, Text } from 'react-native';
 import Grid from '@material-ui/core/Grid';
 
 import NovaCheck from "../components/Novacheck";
+import PharmaCheck from "../components/Pharmacheck";
+
 import {AuthContext} from '../components/context';
 
 export default class Rapport extends Component{
@@ -82,7 +84,11 @@ export default class Rapport extends Component{
                     </Grid>
                     <View>
                         {this.state.show == "pharma" ? this.state.pharma.length <= 0 ? <Text style={Styles.label}>Il n'y a aucune information</Text> :
-                            <Text style={Styles.label}>pharma</Text>
+                            <FlatList
+                            data={this.state.pharma}
+                            renderItem={({item}) => <PharmaCheck data={item} api={this.api} token={this.context.token}/>}
+                            keyExtractor={(item, index) => index.toString()}
+                            />
                             : null 
                         }
                         {this.state.show == "nova" ? this.state.nova.length <= 0 ? <Text style={Styles.label}>Il n'y a aucune information</Text> :

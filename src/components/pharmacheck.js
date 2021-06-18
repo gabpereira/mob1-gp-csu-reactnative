@@ -8,11 +8,11 @@ import {
   TextInput,
 } from 'react-native';
 
-export default class NoveCheck extends Component {
+export default class PharmaCheck extends Component {
   constructor(props) {
     super(props);
 
-    this.updateNovaBulb = this.updateNovaBulb.bind(this);
+    this.updatePharmaBulb = this.updatePharmaBulb.bind(this);
 
     this.state = {
       start: this.props.data.start || 0,
@@ -20,9 +20,9 @@ export default class NoveCheck extends Component {
     };
   }
 
-  async updateNovaBulb() {
+  async updatePharmaBulb() {
     let token = this.props.token;
-    fetch(this.props.api + 'novacheck', {
+    fetch(this.props.api + 'pharmacheck', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -30,8 +30,7 @@ export default class NoveCheck extends Component {
         'Authorization': 'Bearer ' + token,
       },
       body: JSON.stringify({
-        nova_id: this.props.data.nova_id,
-        drug_id: this.props.data.drug_id,
+        batch_id: this.props.data.batch_id,
         drugsheet_id: this.props.data.drugsheet_id,
         date: this.props.data.date,
         start: this.state.start,
@@ -52,11 +51,11 @@ export default class NoveCheck extends Component {
   }
 
   formatDate = (val) => {
-    var d = new Date(val);
+    var date = new Date(val);
 
-    var dd = d.getDate();
-    var mm = d.getMonth() + 1;
-    var yyyy = d.getFullYear();
+    var dd = date.getDate();
+    var mm = date.getMonth() + 1;
+    var yyyy = date.getFullYear();
 
     return ("0" + dd).slice(-2) + '/' + ("0" + mm).slice(-2) + '/' + yyyy;
   }
@@ -70,7 +69,7 @@ export default class NoveCheck extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.label}>De {this.props.data.drug} de la nova {this.props.data.nova}</Text>
+        <Text style={styles.label}>Du lot {this.props.data.batch_number} de {this.props.data.drug}</Text>
         <Text style={styles.label}>pour le {this.formatDate(this.props.data.date)}</Text>
         <Text style={styles.label}>
           Matin: <TextInput
@@ -87,7 +86,7 @@ export default class NoveCheck extends Component {
           />
         </Text>
         <Button
-          onPress={this.updateNovaBulb}
+          onPress={this.updatePharmaBulb}
           title="Envoyer"
         />
       </View>
