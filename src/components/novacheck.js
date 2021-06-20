@@ -6,7 +6,9 @@ import errorManage from './errorManagement';
 export default class NoveCheck extends Component {
 	constructor(props) {
 		super(props);
-
+		this.state = { value: '' };
+		this.onChange = this.onChange.bind(this);
+		this.add = this.add.bind(this);
 		this.updateNovaBulb = this.updateNovaBulb.bind(this);
 
 		this.state = {
@@ -68,6 +70,15 @@ export default class NoveCheck extends Component {
 		});
 	}
 
+	add() {
+		this.props.onButtonClick(this.state.value);
+		this.setState({ value: '' });
+	}
+	
+	onChange(e) {
+		this.setState({ value: e.target.value });
+	}
+
 	render() {
 		return (
 		<View style={styles.container}>
@@ -85,11 +96,14 @@ export default class NoveCheck extends Component {
 				style={styles.input}
 				onChangeText={(int) => this.handleText("end", int)}
 				value={this.state.end}
+          		onChange={this.onChange}
 			/>
 			</Text>
 			<Button
+			disabled={!this.state.value}
 			onPress={this.updateNovaBulb}
 			title="Envoyer"
+			onClick={this.add}
 			/>
 		</View>
 		);
