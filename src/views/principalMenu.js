@@ -5,7 +5,6 @@ import { View, Text, ImageBackground, TouchableOpacity  } from 'react-native';
 
 import {AuthContext} from '../components/context';
 
-import errorManage from  "../components/errorManagement";
 import Toast from 'react-native-toast-message';
 
 export default class PrincipalMenu extends Component{

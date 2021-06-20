@@ -10,8 +10,6 @@ import {AuthContext} from '../components/context';
 import Toast from 'react-native-toast-message';
 import errorManage from '../components/errorManagement';
 
-const Stack = createStackNavigator();
-
 export default class Consult extends Component{
     constructor(props){
         super(props)

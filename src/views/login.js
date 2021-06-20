@@ -5,7 +5,6 @@ import { Text, View, TextInput, ImageBackground, Button } from 'react-native';
 import {AuthContext} from '../components/context';
 import errorManage from  "../components/errorManagement";
 import Toast from 'react-native-toast-message';
-import { setStatusBarBackgroundColor } from 'expo-status-bar';
 export default class Login extends Component{
     constructor(props){
         super(props);

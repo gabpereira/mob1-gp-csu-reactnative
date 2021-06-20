@@ -7,9 +7,8 @@ const errorManage = (code = null) => {
       type: 'error',
       text1: 'Erreur 401',
       text2: "Votre identifiant ou mot de passe n'est pas correct. \nVeuillez les vérifier avant de réessayer!",
-      
-    };
-    break;
+    };break;
+    
     default:
     return {
       type: 'error',

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {StyleSheet, View,Text,FlatList, ImageBackground} from 'react-native';
+import { View, Text, FlatList, ImageBackground} from 'react-native';
 
 import Styles from '../styles/loginStyle';
 
@@ -86,7 +86,3 @@ export default class DetailShiftAction extends Component {
 }
 
 DetailShiftAction.contextType = AuthContext;
-
-const styles = StyleSheet.create({
-
-});
