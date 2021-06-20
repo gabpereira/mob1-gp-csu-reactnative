@@ -11,9 +11,9 @@ export default class Router extends Component {
         super(props);
     
         this.state = {
-          token : localStorage.getItem('token') ?? null,
-          base_name : localStorage.getItem('base_name') ?? null,
-          base_id : localStorage.getItem('base_id') ?? null,
+          token : localStorage.getItem('token') != "null" ? localStorage.getItem('token') : null,
+          base_name : localStorage.getItem('base_name') != "null" ? localStorage.getItem('token') : null,
+          base_id : localStorage.getItem('base_id') != "null" ? localStorage.getItem('token') : null,
         };
       }
     
