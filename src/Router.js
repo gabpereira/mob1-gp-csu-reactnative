@@ -5,6 +5,7 @@ import { DrawerScreen } from './components/drawerscreens';
 import { AuthScreen } from './components/authscreen';
 
 import {AuthContext} from './components/context';
+import Toast, {BaseToast} from 'react-native-toast-message';
 
 export default class Router extends Component {
     constructor(props) {
@@ -48,6 +49,7 @@ export default class Router extends Component {
                         <AuthScreen />
                     )}
                 </NavigationContainer>
+                <Toast ref={(ref) => Toast.setRef(ref)} />
             </AuthContext.Provider>
         )
     }
