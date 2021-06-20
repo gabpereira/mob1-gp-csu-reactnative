@@ -9,6 +9,9 @@ import PharmaCheck from "../components/Pharmacheck";
 
 import {AuthContext} from '../components/context';
 
+import Toast from 'react-native-toast-message';
+import errorManage from '../components/errorManagement';
+
 export default class Rapport extends Component{
 
     constructor(props){
@@ -29,6 +32,8 @@ export default class Rapport extends Component{
         let token = this.context.token;
         let base_id = this.context.base_id;
 
+        let connection_success = true;
+
         let checks =  await fetch(this.api + 'missingchecks/' + base_id, {
             method: 'GET',
             headers: {'Authorization': 'Bearer ' + token},
@@ -38,14 +43,18 @@ export default class Rapport extends Component{
               return response.json();
             }
             else {
-              console.log('Mauvaise réponse du réseau');
+                connection_success = false;
+                Toast.show(errorManage(response.status));
             }
           })
           .then(function(data){
-            return data;
+                if (connection_success){
+                    return data;
+                }
           })
-          .catch(function(error) {
-            console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
+          .catch(function() {
+            connection_success = false;
+            Toast.show(errorManage());
           });
 
           this.setState({

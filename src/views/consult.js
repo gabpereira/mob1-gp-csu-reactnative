@@ -39,14 +39,14 @@ export default class Consult extends Component{
             return response.json();
           }
           else {
-            Toast.show(manageException(response.status));
+            Toast.show(errorManage(response.status));
           }
         })
         .then(function(data){
           return data;
         })
         .catch(function(error) {
-          Toast.show(manageException());
+          Toast.show(errorManage());
         });
 
         this.setState({

@@ -7,8 +7,8 @@ import Styles from '../styles/loginStyle';
 import { AuthContext } from '../components/context'; 
 
 import Toast from 'react-native-toast-message';
-import errorManage
- from './errorManagement';
+import errorManage from './errorManagement';
+
 export default class DetailShiftAction extends Component {
   constructor(props) {
     super(props);
@@ -40,7 +40,7 @@ export default class DetailShiftAction extends Component {
       }
       else {
         connection_success = false;
-        Toast.show(manageException(response.status));
+        Toast.show(errorManage(response.status));
       }
     })
     .then(function(data){
@@ -50,7 +50,7 @@ export default class DetailShiftAction extends Component {
     })
     .catch(function() {
       connection_success = false;
-      Toast.show(manageException());
+      Toast.show(errorManage());
     });
 
     this.setState({
