@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import Styles from '../styles/loginStyle';
 import { Picker } from '@react-native-picker/picker';
 import { Text, View, TextInput, ImageBackground, Button } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+
 import {AuthContext} from '../components/context';
+
+import errorManage from  "../components/errorManagement";
+import Toast from 'react-native-toast-message';
 export default class Login extends Component{
     constructor(props){
         super(props);
@@ -20,7 +23,7 @@ export default class Login extends Component{
             base_id: '',
             initials: '',
             password: '',
-            connection_fail: false,
+            connection_success: true,
         }
     }
 
@@ -30,94 +33,108 @@ export default class Login extends Component{
         let password = this.state.password;
         let base_name =  this.state.base_name;
         let base_id = this.state.base_id;
-        let connection_fail = false;
+        let connection_success = true;
     
         let token = await fetch(str_api + 'gettoken', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({initials: initials, password: password})
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({initials: initials, password: password})
         })
         .then(function(response) {
-          if(response.ok) {
-            return response.json();
-          }
-          else {
-            connection_fail = true;
-          }
+			if(response.ok) {
+				return response.json();
+			}
+			else {
+				connection_success = false;
+				Toast.show(errorManage(response.status));
+			}
         })
         .then(function(data){
-          return data.token;
+			if (connection_success)
+			{
+				return data.token;
+			}
         })
-        .catch(function(error) {
-          console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
+        .catch(function() {
+			connection_success = false;
+			Toast.show(errorManage());
         });
-        if (!connection_fail) {
+        if (connection_success) {
             this.setState({
-              connection_fail: false
+              	connection_success: true
             });
-        this.context.changeIsLogged(token);
-        this.context.changeBase_name(base_name);
-        this.context.changeBase_id(base_id);
+            Toast.show({text1: 'Vous êtes connectez!'});
+			this.context.changeIsLogged(token);
+			this.context.changeBase_name(base_name);
+			this.context.changeBase_id(base_id);
         }
         else {
             this.setState({
-              connection_fail: true
+              	connection_success: false
             });
         }
     }
 
     async getBases(){
         let str_api = 'http://127.0.0.1:8000/api/';
+        let connection_success = true;
     
         let bases =  await fetch(str_api + 'bases', {
-          method: 'GET',
+         	method: 'GET',
         })
         .then(function(response) {
-          if(response.ok) {
-            return response.json();
-          }
-          else {
-            console.log('Mauvaise réponse du réseau');
-          }
+			if(response.ok) {
+				return response.json();
+			}
+			else {
+				connection_success = false;
+				Toast.show(errorManage(response.status));
+			}
         })
         .then(function(data){
-          return data;
+			if (connection_success)
+			{
+				return data;
+			}
         })
-        .catch(function(error) {
-          console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
+        .catch(function() {
+			connection_success = false;
+			Toast.show(errorManage());
         });
 
-        this.setState({
-            bases: bases
-        });
+        if (connection_success) {
+			this.setState({
+				bases: bases
+			});
+        }
     }
 
     handleText(input, value) {
-            this.setState({
-                [input]: value
-            });
+        this.setState({
+            [input]: value
+        });
     }
         
     componentDidMount () {
-            this.getBases();
+        this.getBases();
     }
 
     getBaseName(val) {
-      let baseName = "";
-      this.state.bases.map((base) => {
-        if (val == base.id) {
-          baseName = base.name;
-        }else{
-        }
-      });
-      return baseName;
+		let baseName = "";
+		this.state.bases.map((base) => {
+			if (val == base.id) {
+				baseName = base.name;
+			}else{
+			}
+		});
+		return baseName;
     }
   
     updateBase = (val) => {
-      this.setState({base_name: this.getBaseName(val), base_id: val});
+      	this.setState({base_name: this.getBaseName(val), base_id: val});
     }
 
     render() {
@@ -127,7 +144,6 @@ export default class Login extends Component{
                 style={Styles.background}
             >
                 <View style={Styles.container}>
-                {this.state.connection_fail ? <Text style={Styles.error}>Login ou mot de passe incorrect</Text> : null}
                     <View style={Styles.inputGroups}>
                         <Text style={Styles.label}>Initiales:</Text>
                         <TextInput style={Styles.textInput} maxLength={3} placeholderTextColor="rgb(180, 180, 180)" placeholder="gab" onChangeText={(text) => this.handleText("initials", text)}/>
@@ -135,7 +151,6 @@ export default class Login extends Component{
                     <View style={Styles.inputGroups}>
                         <Text style={Styles.label}>Mdp:</Text>
                         <TextInput style={Styles.textInput} placeholderTextColor="rgb(180, 180, 180)" placeholder="mot de passe" onChangeText={(text) => this.handleText("password", text)} secureTextEntry={true}/>
-                        <Icon name="ios-eye-off-outline" size={20} color="white" />
                     </View>
                     <View style={Styles.inputGroups}>
                         <Text style={Styles.label}>Bases:</Text>

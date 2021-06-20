@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Styles from '../styles/principalMenuStyle';
-
 import { View, Text, ImageBackground, TouchableOpacity  } from 'react-native';
 
 import {AuthContext} from '../components/context';
+
+import errorManage from  "../components/errorManagement";
+import Toast from 'react-native-toast-message';
 export default class PrincipalMenu extends Component{
     constructor(props){
         super(props)
@@ -15,7 +17,7 @@ export default class PrincipalMenu extends Component{
 
         this.state = {
             user: [],
-          };
+        };
     }
 
     async onPressButton() {
@@ -23,28 +25,34 @@ export default class PrincipalMenu extends Component{
         localStorage.removeItem('base_id');
         localStorage.removeItem('base_name');
         this.context.changeIsLogged(null);
+        Toast.show({text1: 'Vous êtes déconnectez!'});
     }
 
     async getUser(_this){
         let token = this.context.token;
+        let connection_success = true;
     
         let user =  await fetch(this.api + 'user', {
-          method: 'GET',
-          headers: {'Authorization': 'Bearer ' + token},
+            method: 'GET',
+            headers: {'Authorization': 'Bearer ' + token},
         })
         .then(function(response) {
-          if(response.ok) {
-            return response.json();
-          }
-          else {
-            console.log('Mauvaise réponse du réseau');
-          }
+            if(response.ok) {
+                return response.json();
+            }
+            else {
+                connection_success = false;
+				Toast.show(errorManage(response.status));            }
         })
         .then(function(data){
-          return data;
+            if (connection_success)
+			{
+				return data;
+			}
         })
-        .catch(function(error) {
-          console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
+        .catch(function() {
+            connection_success = false;
+			Toast.show(errorManage());
         });
 
         this.setState({
@@ -56,7 +64,7 @@ export default class PrincipalMenu extends Component{
         this.setState({
             [input]: value
         });
-}
+    }
 
     componentDidMount () {
         this.getUser();

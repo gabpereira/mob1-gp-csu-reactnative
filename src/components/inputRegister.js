@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Styles from '../styles/loginStyle';
 import { Text, View, TextInput } from 'react-native';
-//import axios from 'axios';
 
 export default class inputRegister extends Component{
     render() {
