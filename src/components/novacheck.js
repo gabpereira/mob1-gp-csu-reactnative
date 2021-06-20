@@ -90,6 +90,7 @@ export default class NoveCheck extends Component {
 				style={styles.input}
 				onChangeText={(int) => this.handleText("start", int)}
 				value={this.state.start}
+				onChange={this.onChange}
 			/>
 			</Text>
 			<Text style={styles.label}>
