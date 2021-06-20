@@ -4,6 +4,10 @@ import Styles from '../styles/principalMenuStyle';
 import { View, Text, ImageBackground, TouchableOpacity  } from 'react-native';
 
 import {AuthContext} from '../components/context';
+
+import errorManage from  "../components/errorManagement";
+import Toast from 'react-native-toast-message';
+
 export default class PrincipalMenu extends Component{
     constructor(props){
         super(props)
@@ -23,6 +27,7 @@ export default class PrincipalMenu extends Component{
         localStorage.removeItem('base_id');
         localStorage.removeItem('base_name');
         this.context.changeIsLogged(null);
+        Toast.show({text1: 'Vous êtes déconnectez!'});
     }
 
     async getUser(_this){
