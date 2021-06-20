@@ -7,7 +7,9 @@ import errorManage from './errorManagement';
 export default class PharmaCheck extends Component {
 	constructor(props) {
 		super(props);
-
+		this.state = { value: '' };
+		this.onChange = this.onChange.bind(this);
+		this.add = this.add.bind(this);
 		this.updatePharmaBulb = this.updatePharmaBulb.bind(this);
 
 		this.state = {
@@ -68,6 +70,15 @@ export default class PharmaCheck extends Component {
 		});
 	}
 
+	add() {
+		this.props.onButtonClick(this.state.value);
+		this.setState({ value: '' });
+	}
+	
+	onChange(e) {
+		this.setState({ value: e.target.value });
+	}
+
 	render() {
 		return (
 		<View style={styles.container}>
@@ -78,6 +89,7 @@ export default class PharmaCheck extends Component {
 				style={styles.input}
 				onChangeText={(int) => this.handleText("start", int)}
 				value={this.state.start}
+				onChange={this.onChange}
 			/>
 			</Text>
 			<Text style={styles.label}>
@@ -85,11 +97,14 @@ export default class PharmaCheck extends Component {
 				style={styles.input}
 				onChangeText={(int) => this.handleText("end", int)}
 				value={this.state.end}
+				onChange={this.onChange}
 			/>
 			</Text>
 			<Button
-			onPress={this.updatePharmaBulb}
-			title="Envoyer"
+				disabled={!this.state.value}
+				onPress={this.updatePharmaBulb}
+				title="Envoyer"
+				onClick={this.add}
 			/>
 		</View>
 		);
