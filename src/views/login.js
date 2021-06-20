@@ -5,6 +5,7 @@ import { Text, View, TextInput, ImageBackground, Button } from 'react-native';
 import {AuthContext} from '../components/context';
 import errorManage from  "../components/errorManagement";
 import Toast from 'react-native-toast-message';
+import { setStatusBarBackgroundColor } from 'expo-status-bar';
 export default class Login extends Component{
     constructor(props){
         super(props);
@@ -64,6 +65,7 @@ export default class Login extends Component{
             this.setState({
               connection_success: true
             });
+            Toast.show({text1: 'Vous êtes connectez!'});
           this.context.changeIsLogged(token);
           this.context.changeBase_name(base_name);
           this.context.changeBase_id(base_id);
