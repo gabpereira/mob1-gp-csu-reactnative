@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 
-import {
-  StyleSheet,
-  View,
-  Text,
-  FlatList,
-  ImageBackground
-} from 'react-native';
+import {StyleSheet, View,Text,FlatList, ImageBackground} from 'react-native';
 
 import Styles from '../styles/loginStyle';
 
 import { AuthContext } from '../components/context'; 
 
+import Toast from 'react-native-toast-message';
+import errorManage
+ from './errorManagement';
 export default class DetailShiftAction extends Component {
   constructor(props) {
     super(props);
@@ -29,6 +26,8 @@ export default class DetailShiftAction extends Component {
     let token = this.context.token;
     let id = this.props.route.params.id;
 
+    let connection_success = true;
+
     let shift_actions = await fetch(this.api + 'myactionsinshift/' + id, {
       method: 'GET',
       headers: {
@@ -40,14 +39,18 @@ export default class DetailShiftAction extends Component {
         return response.json();
       }
       else {
-        console.log(response);
+        connection_success = false;
+        Toast.show(manageException(response.status));
       }
     })
     .then(function(data){
-      return data.data;
+      if (connection_success){
+        return data.data;
+      }
     })
-    .catch(function(error) {
-      console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
+    .catch(function() {
+      connection_success = false;
+      Toast.show(manageException());
     });
 
     this.setState({

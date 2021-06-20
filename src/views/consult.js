@@ -5,9 +5,10 @@ import { View, ImageBackground, Button, FlatList, Text } from 'react-native';
 import Grid from '@material-ui/core/Grid';
 
 import { createStackNavigator } from '@react-navigation/stack';
-import DetailShiftAction from '../components/detailShiftAction'
 
 import {AuthContext} from '../components/context';
+import Toast from 'react-native-toast-message';
+import errorManage from '../components/errorManagement';
 
 const Stack = createStackNavigator();
 
@@ -38,14 +39,14 @@ export default class Consult extends Component{
             return response.json();
           }
           else {
-            console.log('response');
+            Toast.show(manageException(response.status));
           }
         })
         .then(function(data){
           return data;
         })
         .catch(function(error) {
-          console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
+          Toast.show(manageException());
         });
 
         this.setState({
