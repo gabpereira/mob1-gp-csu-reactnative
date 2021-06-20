@@ -7,6 +7,7 @@ import {
   Text,
   TextInput,
 } from 'react-native';
+import errorManage from './errorManagement';
 
 export default class NoveCheck extends Component {
   constructor(props) {
@@ -22,6 +23,8 @@ export default class NoveCheck extends Component {
 
   async updateNovaBulb() {
     let token = this.props.token;
+    let success_message = "Modification faite : " + this.props.data.drug + " de la nova " + this.props.data.nova;
+
     fetch(this.props.api + 'novacheck', {
       method: 'POST',
       headers: {
@@ -40,14 +43,18 @@ export default class NoveCheck extends Component {
     })
     .then(function(response) {
       if(response.ok) {
-        alert("Changement réussi");
+        Toast.show({
+          type: 'success',
+          text1: 'Modification réussi!',
+          text2: success_message
+        });
       }
       else {
-        console.log('Mauvaise réponse du réseau');
+        Toast.show(errorManage(response.status));
       }
     })
-    .catch(function(error) {
-      console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
+    .catch(function() {
+        Toast.show(errorManage());
     });
   }
 
