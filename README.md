@@ -4,11 +4,14 @@
 - Contraintes utiliser les class et non les functions
 
 ## Différents outils mis a disposition
-- IceScrum -> gestion du projet: https://icescrum.cpnv.ch/p/MOB1GABP/#/backlog/backlog
-- CSU Checker sur youtube -> Sur quoi nous devons nous baser: https://www.youtube.com/watch?v=rbjkvZLlteM&ab_channel=XavierCarrel
-- L'api fait sur Laravel: https://github.com/XCarrel/CSUAPI
+- [IceScrum](https://icescrum.cpnv.ch/p/MOB1GPA/#/project) -> gestion du projet
+- [CSU vidéo](https://www.youtube.com/watch?v=rbjkvZLlteM&ab_channel=XavierCarrel) -> Le model de base
+- [L'api](https://github.com/XCarrel/CSUAPI) -> fait sur Laravel
 ## Installation
-lancer l app avec: **expo start**
+- npm install -g expo-cli
+## Lancement
+- lancer **npm i**
+- lancer l app avec: **expo start**
 
 **a** open Android  
 **w** open web  
