@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { StyleSheet, View, Button, Text, TextInput, } from 'react-native';
 import errorManage from './errorManagement';
+import Toast from 'react-native-toast-message';
 
 export default class NoveCheck extends Component {
 	constructor(props) {
