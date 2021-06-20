@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 
-import {
-  StyleSheet,
-  View,
-  Button,
-  Text,
-  TextInput,
-} from 'react-native';
+import { StyleSheet, View, Button, Text, TextInput } from 'react-native';
+
+import Toast from 'react-native-toast-message';
+import errorManage from './errorManagement';
 
 export default class PharmaCheck extends Component {
   constructor(props) {
@@ -22,6 +19,8 @@ export default class PharmaCheck extends Component {
 
   async updatePharmaBulb() {
     let token = this.props.token;
+    let success_message = "Modification faite : " + this.props.data.drug + " de la pharma " + this.props.data.pharma;
+
     fetch(this.props.api + 'pharmacheck', {
       method: 'POST',
       headers: {
@@ -39,14 +38,18 @@ export default class PharmaCheck extends Component {
     })
     .then(function(response) {
       if(response.ok) {
-        alert("Changement réussi");
+        Toast.show({
+          type: 'success',
+          text1: 'Modification réussi!',
+          text2: success_message
+        });
       }
       else {
-        console.log('Mauvaise réponse du réseau');
+        Toast.show(errorManage(response.status));
       }
     })
-    .catch(function(error) {
-      console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
+    .catch(function() {
+        Toast.show(errorManage());
     });
   }
 
