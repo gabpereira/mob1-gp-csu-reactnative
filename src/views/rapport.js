@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Styles from '../styles/loginStyle';
-
 import { View, ImageBackground, Button, FlatList, Text } from 'react-native';
 import Grid from '@material-ui/core/Grid';
 
@@ -40,44 +39,44 @@ export default class Rapport extends Component{
         })
         .then(function(response) {
             if(response.ok) {
-              return response.json();
+                return response.json();
             }
             else {
                 connection_success = false;
                 Toast.show(errorManage(response.status));
             }
-          })
-          .then(function(data){
-                if (connection_success){
-                    return data;
-                }
-          })
-          .catch(function() {
+        })
+        .then(function(data){
+            if (connection_success){
+                return data;
+            }
+        })
+        .catch(function() {
             connection_success = false;
             Toast.show(errorManage());
-          });
+        });
 
-          this.setState({
+        this.setState({
             pharma: checks ? checks.pharma : [],
             nova: checks ? checks.nova : [],
-          });
+        });
     }
 
     showPharma = () => {
         this.setState({
-          show: "pharma"
+            show: "pharma"
         });
     }
     
     showNova = () => {
         this.setState({
-          show: "nova"
+            show: "nova"
         });
     }
 
     componentDidMount () {
         this.getChecks();
-     }
+    }
 
     render() {
         return(

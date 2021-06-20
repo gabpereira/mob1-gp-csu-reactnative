@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import Styles from '../styles/loginStyle';
-
 import { View, ImageBackground, Button, FlatList, Text } from 'react-native';
 import Grid from '@material-ui/core/Grid';
 
-import { createStackNavigator } from '@react-navigation/stack';
-
 import {AuthContext} from '../components/context';
+
 import Toast from 'react-native-toast-message';
 import errorManage from '../components/errorManagement';
 
@@ -29,22 +27,22 @@ export default class Consult extends Component{
         let token = this.context.token;
     
         let reports =  await fetch(this.api + 'reports', {
-          method: 'GET',
-          headers: {'Authorization': 'Bearer ' + token},
+			method: 'GET',
+			headers: {'Authorization': 'Bearer ' + token},
         })
         .then(function(response) {
-          if(response.ok) {
-            return response.json();
-          }
-          else {
-            Toast.show(errorManage(response.status));
-          }
+			if(response.ok) {
+				return response.json();
+			}
+			else {
+				Toast.show(errorManage(response.status));
+			}
         })
         .then(function(data){
-          return data;
+          	return data;
         })
-        .catch(function(error) {
-          Toast.show(errorManage());
+        .catch(function() {
+          	Toast.show(errorManage());
         });
 
         this.setState({
@@ -55,13 +53,13 @@ export default class Consult extends Component{
 
     showShift = () => {
         this.setState({
-          show: "shift"
+          	show: "shift"
         });
     }
     
     showDrug = () => {
         this.setState({
-          show: "drug"
+          	show: "drug"
         });
     }
     

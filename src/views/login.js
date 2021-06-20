@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import Styles from '../styles/loginStyle';
 import { Picker } from '@react-native-picker/picker';
 import { Text, View, TextInput, ImageBackground, Button } from 'react-native';
+
 import {AuthContext} from '../components/context';
+
 import errorManage from  "../components/errorManagement";
 import Toast from 'react-native-toast-message';
 export default class Login extends Component{
@@ -34,44 +36,44 @@ export default class Login extends Component{
         let connection_success = true;
     
         let token = await fetch(str_api + 'gettoken', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({initials: initials, password: password})
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({initials: initials, password: password})
         })
         .then(function(response) {
-          if(response.ok) {
-            return response.json();
-          }
-          else {
-            connection_success = false;
-            Toast.show(errorManage(response.status));
-          }
+			if(response.ok) {
+				return response.json();
+			}
+			else {
+				connection_success = false;
+				Toast.show(errorManage(response.status));
+			}
         })
         .then(function(data){
-          if (connection_success)
-          {
-            return data.token;
-          }
+			if (connection_success)
+			{
+				return data.token;
+			}
         })
         .catch(function() {
-          connection_success = false;
-          Toast.show(errorManage());
+			connection_success = false;
+			Toast.show(errorManage());
         });
         if (connection_success) {
             this.setState({
-              connection_success: true
+              	connection_success: true
             });
             Toast.show({text1: 'Vous êtes connectez!'});
-          this.context.changeIsLogged(token);
-          this.context.changeBase_name(base_name);
-          this.context.changeBase_id(base_id);
+			this.context.changeIsLogged(token);
+			this.context.changeBase_name(base_name);
+			this.context.changeBase_id(base_id);
         }
         else {
             this.setState({
-              connection_success: false
+              	connection_success: false
             });
         }
     }
@@ -81,58 +83,58 @@ export default class Login extends Component{
         let connection_success = true;
     
         let bases =  await fetch(str_api + 'bases', {
-          method: 'GET',
+         	method: 'GET',
         })
         .then(function(response) {
-          if(response.ok) {
-            return response.json();
-          }
-          else {
-            connection_success = false;
-            Toast.show(errorManage(response.status));
-          }
+			if(response.ok) {
+				return response.json();
+			}
+			else {
+				connection_success = false;
+				Toast.show(errorManage(response.status));
+			}
         })
         .then(function(data){
-          if (connection_success)
-          {
-            return data;
-          }
+			if (connection_success)
+			{
+				return data;
+			}
         })
         .catch(function() {
-          connection_success = false;
-          Toast.show(errorManage());
+			connection_success = false;
+			Toast.show(errorManage());
         });
 
         if (connection_success) {
-          this.setState({
-              bases: bases
-          });
+			this.setState({
+				bases: bases
+			});
         }
     }
 
     handleText(input, value) {
-            this.setState({
-                [input]: value
-            });
+        this.setState({
+            [input]: value
+        });
     }
         
     componentDidMount () {
-            this.getBases();
+        this.getBases();
     }
 
     getBaseName(val) {
-      let baseName = "";
-      this.state.bases.map((base) => {
-        if (val == base.id) {
-          baseName = base.name;
-        }else{
-        }
-      });
-      return baseName;
+		let baseName = "";
+		this.state.bases.map((base) => {
+			if (val == base.id) {
+				baseName = base.name;
+			}else{
+			}
+		});
+		return baseName;
     }
   
     updateBase = (val) => {
-      this.setState({base_name: this.getBaseName(val), base_id: val});
+      	this.setState({base_name: this.getBaseName(val), base_id: val});
     }
 
     render() {

@@ -12,32 +12,32 @@ export default class Router extends Component {
         super(props);
     
         this.state = {
-          token : localStorage.getItem('token') != "null" ? localStorage.getItem('token') : null,
-          base_name : localStorage.getItem('base_name') != "null" ? localStorage.getItem('token') : null,
-          base_id : localStorage.getItem('base_id') != "null" ? localStorage.getItem('token') : null,
+			token : localStorage.getItem('token') != "null" ? localStorage.getItem('token') : null,
+			base_name : localStorage.getItem('base_name') != "null" ? localStorage.getItem('token') : null,
+			base_id : localStorage.getItem('base_id') != "null" ? localStorage.getItem('token') : null,
         };
-      }
+    }
     
-      changeIsLogged = (val) => {
+    changeIsLogged = (val) => {
         this.setState({
-          token: val,
+        	token: val,
         });
         localStorage.setItem("token", val);
-      }
+    }
 
-      changeBase_name = (val) => {
+    changeBase_name = (val) => {
         this.setState({
-          base_name: val,
+          	base_name: val,
         });
         localStorage.setItem("base_name", val);
-      }
+    }
 
-      changeBase_id = (val) => {
+    changeBase_id = (val) => {
         this.setState({
-          base_id: val,
+          	base_id: val,
         });
         localStorage.setItem("base_id", val);
-      }
+    }
 
     render() {
         return(
