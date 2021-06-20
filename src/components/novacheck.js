@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 
-import { StyleSheet, View, Button, Text, TextInput, } from 'react-native';
+import { View, Button, Text, TextInput, } from 'react-native';
 import errorManage from './errorManagement';
+import Toast from 'react-native-toast-message';
+import styles from '../styles/checkStyle';
+import Grid from '@material-ui/core/Grid';
 
 export default class NoveCheck extends Component {
 	constructor(props) {
 		super(props);
-
+		this.state = { value: '' };
+		this.onChange = this.onChange.bind(this);
+		this.add = this.add.bind(this);
 		this.updateNovaBulb = this.updateNovaBulb.bind(this);
 
 		this.state = {
@@ -68,52 +73,50 @@ export default class NoveCheck extends Component {
 		});
 	}
 
+	add() {
+		this.props.onButtonClick(this.state.value);
+		this.setState({ value: '' });
+	}
+	
+	onChange(e) {
+		this.setState({ value: e.target.value });
+	}
+
 	render() {
 		return (
 		<View style={styles.container}>
 			<Text style={styles.label}>De {this.props.data.drug} de la nova {this.props.data.nova}</Text>
 			<Text style={styles.label}>pour le {this.formatDate(this.props.data.date)}</Text>
-			<Text style={styles.label}>
-			Matin: <TextInput
-				style={styles.input}
-				onChangeText={(int) => this.handleText("start", int)}
-				value={this.state.start}
-			/>
-			</Text>
-			<Text style={styles.label}>
-			Soir: <TextInput
-				style={styles.input}
-				onChangeText={(int) => this.handleText("end", int)}
-				value={this.state.end}
-			/>
-			</Text>
+			<Grid container spacing={3}>
+					<Grid item xs={6}>
+						<Text style={styles.label}>
+						Matin: <TextInput
+							style={styles.input}
+							onChangeText={(int) => this.handleText("start", int)}
+							value={this.state.start}
+							onChange={this.onChange}
+						/>
+						</Text>
+					</Grid>
+					<Grid item xs={6}>
+						<Text style={styles.label}>
+						Soir: <TextInput
+							style={styles.input}
+							onChangeText={(int) => this.handleText("end", int)}
+							value={this.state.end}
+							onChange={this.onChange}
+						/>
+						</Text>
+					</Grid>
+				</Grid>
 			<Button
-			onPress={this.updateNovaBulb}
-			title="Envoyer"
+				style={styles.button}
+				disabled={!this.state.value}
+				onPress={this.updateNovaBulb}
+				title="Envoyer"
+				onClick={this.add}
 			/>
 		</View>
 		);
 	}
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'rgba(0, 0, 0, 0.45)',
-    borderColor: "black",
-    borderWidth: 1,
-    marginVertical:10,
-    borderColor: 'transparent',
-    borderRadius: 10,
-  },
-  input: {
-    borderColor: "white",
-    borderWidth:1,
-    color: 'white',
-  },
-  label: {
-    flex: 0,
-    fontSize: 15,
-    paddingRight: 10,
-    color: 'white',
-},
-});
