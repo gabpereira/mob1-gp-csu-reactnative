@@ -4,8 +4,8 @@ import { View, Text, ImageBackground, TouchableOpacity  } from 'react-native';
 
 import {AuthContext} from '../components/context';
 
+import errorManage from  "../components/errorManagement";
 import Toast from 'react-native-toast-message';
-
 export default class PrincipalMenu extends Component{
     constructor(props){
         super(props)
@@ -30,6 +30,7 @@ export default class PrincipalMenu extends Component{
 
     async getUser(_this){
         let token = this.context.token;
+        let connection_success = true;
     
         let user =  await fetch(this.api + 'user', {
             method: 'GET',
@@ -40,14 +41,18 @@ export default class PrincipalMenu extends Component{
                 return response.json();
             }
             else {
-                console.log('Mauvaise réponse du réseau');
-            }
+                connection_success = false;
+				Toast.show(errorManage(response.status));            }
         })
         .then(function(data){
-            return data;
+            if (connection_success)
+			{
+				return data;
+			}
         })
-        .catch(function(error) {
-            console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
+        .catch(function() {
+            connection_success = false;
+			Toast.show(errorManage());
         });
 
         this.setState({
