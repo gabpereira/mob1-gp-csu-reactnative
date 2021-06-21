@@ -14,7 +14,7 @@ export default class PrincipalMenu extends Component{
 
         this.getUser = this.getUser.bind(this);
         this.onPressButton = this.onPressButton.bind(this);
-
+        
         this.state = {
             user: [],
         };
@@ -86,7 +86,7 @@ export default class PrincipalMenu extends Component{
                             style={Styles.buttonLogout} 
                             onPress={this.onPressButton}
                         >
-                        <Text style={Styles.textLogout}>{this.state.user.initials} Déconnexion</Text>
+                        <Text style={Styles.textLogout}>{this.state.user.initials}@{this.context.base_name} Déconnexion</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
