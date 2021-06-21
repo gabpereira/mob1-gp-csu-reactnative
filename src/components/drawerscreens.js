@@ -9,6 +9,8 @@ import Consult from '../views/consult';
 import PrincipalMenu from '../views/principalMenu';
 import Rapport from '../views/rapport';
 import DetailShiftAction from './detailShiftAction';
+import adminPage from '../views/AdminPage';
+import { AuthContext } from './context';
 
 const ConsultStack = createStackNavigator();
 const ConsultStackScreen = ({ navigation }) => (
@@ -22,6 +24,19 @@ const ConsultStackScreen = ({ navigation }) => (
             ) }} />
         <ConsultStack.Screen name="Détail" component={DetailShiftAction} />
     </ConsultStack.Navigator>
+);
+
+const AdminStack = createStackNavigator();
+const AdminStackScreen = ({ navigation }) => (
+    <AdminStack.Navigator >
+        <AdminStack.Screen name="Admin" component={adminPage} options={{ 
+            title: "Admin", 
+            headerLeft: () => (
+                <TouchableOpacity style={{ paddingLeft: 10, paddingTop: 5 }} onPress={() => navigation.openDrawer()}>
+                    <Icon name='ios-menu' size={25} color='black' />
+                </TouchableOpacity>
+            ) }} />
+    </AdminStack.Navigator>
 );
 
 const RapportStack = createStackNavigator();
@@ -51,10 +66,15 @@ const PrincipalMenuStackScreen = ({ navigation }) => (
 );
 
 const Drawer = createDrawerNavigator();
-export const DrawerScreen = () => (
+export const DrawerScreen = () => {
+    const { admin } = React.useContext(AuthContext);
+    return (
     <Drawer.Navigator initialRouteName="Menu Principal" drawerType="back" drawerContentOptions={{ labelStyle: { fontSize: 20,}, activeBackgroundColor: "rgba(160, 187, 194, 0.5)", activeTintColor: "rgb(0, 94, 146)" }} drawerStyle={{ position: "absolute", top: 60 }} >
         <Drawer.Screen name="Consulter" component={ConsultStackScreen} />
         <Drawer.Screen name="Rapporter" component={RapportStackScreen} />
         <Drawer.Screen name="Menu Principal" component={PrincipalMenuStackScreen} />
+        {admin == 1 && (
+            <Drawer.Screen name="Admin" component={AdminStackScreen} />
+        )}
     </Drawer.Navigator>
-);
+)};

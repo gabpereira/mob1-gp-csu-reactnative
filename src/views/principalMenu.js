@@ -17,6 +17,7 @@ export default class PrincipalMenu extends Component{
         
         this.state = {
             user: [],
+            admin: '',
         };
     }
 
@@ -24,6 +25,7 @@ export default class PrincipalMenu extends Component{
         localStorage.removeItem('token');
         localStorage.removeItem('base_id');
         localStorage.removeItem('base_name');
+        localStorage.removeItem('admin');
         this.context.changeIsLogged(null);
         Toast.show({text1: 'Vous êtes déconnectez!'});
     }
@@ -54,10 +56,14 @@ export default class PrincipalMenu extends Component{
             connection_success = false;
 			Toast.show(errorManage());
         });
-
+        
         this.setState({
             user: user
         });
+
+        let admin = user.admin
+
+        this.context.changeAdmin(admin);
     }
 
     handleText(input, value) {
