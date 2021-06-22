@@ -144,6 +144,7 @@ export default class Login extends Component{
                 style={Styles.background}
             >
                 <View style={Styles.container}>
+                    <Text style={Styles.eval}>Version: eval GPA</Text>
                     <View style={Styles.inputGroups}>
                         <Text style={Styles.label}>Initiales:</Text>
                         <TextInput style={Styles.textInput} maxLength={3} placeholderTextColor="rgb(180, 180, 180)" placeholder="gab" onChangeText={(text) => this.handleText("initials", text)}/>

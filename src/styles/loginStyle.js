@@ -38,6 +38,12 @@ const styles = StyleSheet.create({
     error:{
         color: "red",
     },
+
+    eval:{
+        color: "white",
+        fontSize: 9,
+        marginBottom: 50,
+    }
 });
 
 export default styles; 
