@@ -137,6 +137,11 @@ export default class PrincipalMenu extends Component{
                             </TouchableOpacity>
                         </View>
                     )}
+                    {this.context.sumConfirmations == 0 &&(
+                        <View>
+                            <Text style={Styles.label}>Vous avez confirmé tous vos horaires</Text>
+                        </View>
+                    )}
                     <View>
                         <TouchableOpacity 
                             activeOpacity={0.95} 
