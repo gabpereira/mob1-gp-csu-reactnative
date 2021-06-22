@@ -84,7 +84,8 @@ export default class PrincipalMenu extends Component{
                         <TouchableOpacity 
                             activeOpacity={0.95} 
                             style={Styles.buttonLogout} 
-                            onPress={this.onPressButton}
+                            onPress={() => this.props.navigation.navigate('Horaires à confirmer')
+                            }
                         >
                         <Text style={Styles.textLogout}>Horaires à confirmer</Text>
                         </TouchableOpacity>

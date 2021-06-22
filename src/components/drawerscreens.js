@@ -9,6 +9,7 @@ import Consult from '../views/consult';
 import PrincipalMenu from '../views/principalMenu';
 import Rapport from '../views/rapport';
 import DetailShiftAction from './detailShiftAction';
+import Hours from '../views/Hours'
 
 const ConsultStack = createStackNavigator();
 const ConsultStackScreen = ({ navigation }) => (
@@ -47,6 +48,7 @@ const PrincipalMenuStackScreen = ({ navigation }) => (
                     <Icon name='ios-menu' size={25} color='black' />
                 </TouchableOpacity>
             ) }} />
+        <PrincipalMenuStack.Screen name="Horaires à confirmer" component={Hours} />
     </PrincipalMenuStack.Navigator>
 );
 
