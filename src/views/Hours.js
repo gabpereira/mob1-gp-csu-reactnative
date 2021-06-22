@@ -76,10 +76,12 @@ export default class hours extends Component{
                                         <Text style={Styles.text}>{hour.date}</Text>
                                     </Grid>
                                     <Grid item xs={6}>
-                                        <Text style={Styles.text}></Text>
+                                        { hour.confirmation == 0 &&(<Text style={Styles.text}>A discuter</Text>)}
+                                        { hour.confirmation == null &&(<Text style={Styles.text}>Inconnu</Text>)}
+                                        { hour.confirmation == 1 &&(<Text style={Styles.text}>Confirmé</Text>)}
                                     </Grid>
                                 </Grid>
-                                <Text style={Styles.text}>Votre code de travail sera {hour.status}</Text>
+                                <Text style={Styles.text}>Votre code de travail sera {hour.worktime.type}</Text>
                                 <Grid container spacing={3}>
                                     <Grid item xs={6}>
                                     <Button title='Confirmé'/>
