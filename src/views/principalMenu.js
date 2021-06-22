@@ -13,10 +13,13 @@ export default class PrincipalMenu extends Component{
         this.api = 'http://127.0.0.1:8000/api/';
 
         this.getUser = this.getUser.bind(this);
+        this.getHours = this.getHours.bind(this);
         this.onPressButton = this.onPressButton.bind(this);
 
         this.state = {
             user: [],
+            hours: [],
+            sumConfirmations: '',
         };
     }
 
@@ -60,6 +63,46 @@ export default class PrincipalMenu extends Component{
         });
     }
 
+    async getHours(_this){
+        let token = this.context.token;
+        let connection_success = true;
+    
+        let hours =  await fetch(this.api + 'unconfirmedworkplans', {
+            method: 'GET',
+            headers: {'Authorization': 'Bearer ' + token},
+        })
+        .then(function(response) {
+            if(response.ok) {
+                return response.json();
+            }
+            else {
+                connection_success = false;
+				Toast.show(errorManage(response.status));            }
+        })
+        .then(function(data){
+            if (connection_success)
+			{
+				return data;
+			}
+        })
+        .catch(function() {
+            connection_success = false;
+			Toast.show(errorManage());
+        });
+
+        this.setState({
+            hours: hours
+        });
+
+        let sumConfirmations = "";
+        this.state.hours.map((hour) => {
+            if (hour.confirmation == 0) {
+                sumConfirmations++;
+            };
+        });
+        this.context.changeSumConfirmations(sumConfirmations);
+    }
+
     handleText(input, value) {
         this.setState({
             [input]: value
@@ -68,6 +111,7 @@ export default class PrincipalMenu extends Component{
 
     componentDidMount () {
         this.getUser();
+        this.getHours();
     }
 
     render() {
@@ -80,16 +124,18 @@ export default class PrincipalMenu extends Component{
                     <View style={Styles.inputGroups}>
                         <Text style={Styles.label}>Prénom: {this.state.user.firstname}{'\n'}Nom: {this.state.user.lastname}</Text>
                     </View>
-                    <View>
-                        <TouchableOpacity 
-                            activeOpacity={0.95} 
-                            style={Styles.buttonLogout} 
-                            onPress={() => this.props.navigation.navigate('Horaires à confirmer')
-                            }
-                        >
-                        <Text style={Styles.textLogout}>Horaires à confirmer</Text>
-                        </TouchableOpacity>
-                    </View>
+                    {this.context.sumConfirmations >= 1 &&(
+                        <View>
+                            <TouchableOpacity 
+                                activeOpacity={0.95} 
+                                style={Styles.buttonLogout} 
+                                onPress={() => this.props.navigation.navigate('Horaires à confirmer')
+                                }
+                            >
+                            <Text style={Styles.textLogout}>{this.context.sumConfirmations} Horaires à confirmer</Text>
+                            </TouchableOpacity>
+                        </View>
+                    )}
                     <View>
                         <TouchableOpacity 
                             activeOpacity={0.95} 

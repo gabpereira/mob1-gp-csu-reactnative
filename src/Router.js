@@ -14,7 +14,8 @@ export default class Router extends Component {
         this.state = {
 			token : localStorage.getItem('token') != "null" ? localStorage.getItem('token') : null,
 			base_name : localStorage.getItem('base_name') != "null" ? localStorage.getItem('token') : null,
-			base_id : localStorage.getItem('base_id') != "null" ? localStorage.getItem('token') : null,
+            base_id : localStorage.getItem('base_id') != "null" ? localStorage.getItem('token') : null,
+            sumConfirmations : localStorage.getItem('sumConfirmations') != "null" ? localStorage.getItem('token') : null,
         };
     }
     
@@ -39,9 +40,16 @@ export default class Router extends Component {
         localStorage.setItem("base_id", val);
     }
 
+    changeSumConfirmations = (val) => {
+        this.setState({
+            sumConfirmations: val,
+        });
+        localStorage.setItem("sumConfirmations", val);
+    }
+
     render() {
         return(
-            <AuthContext.Provider value={{ token: this.state.token, base_name: this.state.base_name, base_id: this.state.base_id, changeIsLogged: this.changeIsLogged, changeBase_name: this.changeBase_name, changeBase_id: this.changeBase_id}}>
+            <AuthContext.Provider value={{ token: this.state.token, base_name: this.state.base_name, base_id: this.state.base_id, sumConfirmations: this.state.sumConfirmations, changeIsLogged: this.changeIsLogged, changeBase_name: this.changeBase_name, changeBase_id: this.changeBase_id, changeSumConfirmations: this.changeSumConfirmations}}>
                 <NavigationContainer>
                     {this.state.token ? (
                         <DrawerScreen />
