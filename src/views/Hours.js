@@ -69,10 +69,17 @@ export default class hours extends Component{
                         <Text style={Styles.text}>Il vous reste {this.context.sumConfirmations} Horaires à confirmer</Text>
                     </View>
                     { this.state.hours.map((hour) => (
-                         !hour.confirmation == 1 && (
+                         hour.confirmation == null || hour.confirmation == 0 && (
                             <View style={Styles.container}>
-                                <Text style={Styles.text}>{hour.date}</Text>
-                                    <Text style={Styles.text}>Votre code de travail sera {hour.worktime.type}</Text>
+                                <Grid container spacing={3}>
+                                    <Grid item xs={6}>
+                                        <Text style={Styles.text}>{hour.date}</Text>
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <Text style={Styles.text}></Text>
+                                    </Grid>
+                                </Grid>
+                                <Text style={Styles.text}>Votre code de travail sera {hour.status}</Text>
                                 <Grid container spacing={3}>
                                     <Grid item xs={6}>
                                     <Button title='Confirmé'/>
