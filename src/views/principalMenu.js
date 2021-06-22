@@ -86,6 +86,15 @@ export default class PrincipalMenu extends Component{
                             style={Styles.buttonLogout} 
                             onPress={this.onPressButton}
                         >
+                        <Text style={Styles.textLogout}>Horaires à confirmer</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View>
+                        <TouchableOpacity 
+                            activeOpacity={0.95} 
+                            style={Styles.buttonLogout} 
+                            onPress={this.onPressButton}
+                        >
                         <Text style={Styles.textLogout}>{this.state.user.initials} Déconnexion</Text>
                         </TouchableOpacity>
                     </View>

@@ -41,9 +41,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         elevation:3,
+        marginBottom: 30,
     },
     textLogout: {
-        flex: 0,
         fontSize: 16,
         color: "white",
         fontWeight: 'bold',
