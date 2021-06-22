@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Styles from '../styles/hoursStyle';
-import { Text, View, ImageBackground } from 'react-native';
+import { Text, View, ImageBackground, Button } from 'react-native';
+import Grid from '@material-ui/core/Grid';
 
 import {AuthContext} from '../components/context';
-import { Button } from '@material-ui/core';
 
 export default class hours extends Component{
     constructor(props){
@@ -48,7 +48,6 @@ export default class hours extends Component{
         });
 
         let worktime = this.state.hours.worktime;
-
         this.setState({
             hours: hours,
             worktime: worktime,
@@ -65,28 +64,26 @@ export default class hours extends Component{
             source={require('../pictures/space.jpg')}
             style={Styles.background}
             >
-                <View style={Styles.container}>
-                    <View>
+                <View>
+                    <View style={Styles.container}>
                         <Text style={Styles.text}>Il vous reste {this.context.sumConfirmations} Horaires à confirmer</Text>
                     </View>
-                    { this.state.hours.map((hour) => {
-                        if (hour.confirmation == 0 || hour.confirmation == null) {
-                            <View>
-                                <Text>{this.state.hour.date}</Text>
-                                {this.state.worktime.map((worktime) => {
-                                    <Text style={Styles.text}>Votre code de travail sera {worktime.type}</Text>
-                                })}
+                    { this.state.hours.map((hour) => (
+                         !hour.confirmation == 1 && (
+                            <View style={Styles.container}>
+                                <Text style={Styles.text}>{hour.date}</Text>
+                                    <Text style={Styles.text}>Votre code de travail sera {hour.worktime.type}</Text>
                                 <Grid container spacing={3}>
                                     <Grid item xs={6}>
-                                        <Button>Confirmé</Button>
+                                    <Button title='Confirmé'/>
                                     </Grid>
                                     <Grid item xs={6}>
-                                        <Button>A discuté</Button>
+                                        <Button title='A discuté' />
                                     </Grid>
                                 </Grid>
                             </View>
-                        };
-                     })}
+                        )
+                    ))}
                 </View>
             </ImageBackground>
         )

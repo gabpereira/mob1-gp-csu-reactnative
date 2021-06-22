@@ -124,7 +124,6 @@ export default class PrincipalMenu extends Component{
                     <View style={Styles.inputGroups}>
                         <Text style={Styles.label}>Prénom: {this.state.user.firstname}{'\n'}Nom: {this.state.user.lastname}</Text>
                     </View>
-                    {console.log(this.state.hours)}
                     {this.context.sumConfirmations >= 1 &&(
                         <View>
                             <TouchableOpacity 

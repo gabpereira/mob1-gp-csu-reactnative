@@ -14,10 +14,6 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
         paddingTop: 10,
         paddingLeft:20,
-        borderColor: 'transparent',
-        borderWidth: 1,
-        borderRadius: 100,
-        backgroundColor: 'rgba(0, 0, 0, 0.45)',
     },
 
     pastille: {
@@ -37,6 +33,18 @@ const styles = StyleSheet.create({
 		marginVertical:10,
 		borderColor: 'transparent',
 		borderRadius: 10,
-	},
+    },
+    
+    button: {
+        width: "96%", 
+        marginLeft: "2%",
+        flexDirection: 'row', 
+        height: 70, 
+        backgroundColor: 'rgb(33, 150, 243)',
+        alignItems: 'center',
+        justifyContent: 'center',
+        elevation:3,
+        marginBottom: 30,
+    },
 })
 export default styles; 
