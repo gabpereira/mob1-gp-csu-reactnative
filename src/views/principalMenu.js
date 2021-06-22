@@ -132,7 +132,8 @@ export default class PrincipalMenu extends Component{
                                 onPress={() => this.props.navigation.navigate('Horaires à confirmer')
                                 }
                             >
-                            <Text style={Styles.textLogout}>{this.context.sumConfirmations} Horaires à confirmer</Text>
+                            <Text style={Styles.pastille}> {this.context.sumConfirmations} </Text>
+                            <Text style={Styles.textLogout}>Horaires à confirmer</Text>
                             </TouchableOpacity>
                         </View>
                     )}

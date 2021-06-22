@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions, YellowBox } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
@@ -48,6 +48,16 @@ const styles = StyleSheet.create({
         color: "white",
         fontWeight: 'bold',
     },
+
+    pastille: {
+        fontSize: 16,
+        color: "white",
+        fontWeight: 'bold',
+        backgroundColor: 'green',
+        borderColor: 'transparent',
+        borderWidth: 1,
+        borderRadius: 100,
+    }
 });
 
 export default styles; 
